@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishweshwarraya Abhiyantriki Padvika Mahavidyalaya, Alamla Blog & News Website!</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="shortcut icon" href="/img/logo.jpg" type="image/x-icon">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <img src="/img/logo.jpg" alt="Logo" class="collage-logo">
+            <a class="navbar-brand" href="/index.html">VAPM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Technology</a></li>
+                            <li><a class="dropdown-item" href="#">Technical News</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Placements</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pages/contact.html">Contact</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-dark" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <center>
+            <h2><tt id="blogsection"></tt></h2>
+        </center>
+        <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" id="dhcp">
+                        How You Set up your own DHCP Server?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <article>
+                            <p>Dynamic Host Configuration Protocol (DHCP) is a critical service in modern networking. It
+                                automates the process of assigning IP addresses and other network configuration
+                                parameters to devices on a network. While many routers and network appliances come with
+                                built-in DHCP servers, you may want to set up your own DHCP server for more control,
+                                flexibility, and customization. In this blog post, we'll walk you through the steps to
+                                set up your own DHCP server on a Linux-based system.</p>
+                            <p>Step 1: Choose Your DHCP Server Software
+                                There are several DHCP server software options available for Linux, with two of the most
+                                popular being:
+                                ISC DHCP Server: This is a widely used DHCP server that is well-documented and
+                                supported. It's a good choice for beginners.
+                                Dnsmasq: Dnsmasq is a lightweight DHCP and DNS server that's easy to configure. It's
+                                suitable for small to medium-sized networks.
+                                For this guide, we'll use the ISC DHCP Server. You can install it on your Linux system
+                                using your distribution's package manager. For Debian-based systems like Ubuntu, use:
+                            </p>
+                            <b><code>sudo apt-get install isc-dhcp-server</code></b>
+                            <p>For Red Hat-based systems like CentOS, use:</p>
+                            <b><code>sudo yum install dhcp</code></b>
+                            <p>Step 2: Configure the DHCP Server
+                                After installing the DHCP server software, you'll need to configure it to suit your
+                                network. The main configuration file for the ISC DHCP Server is typically located at
+                                /etc/dhcp/dhcpd.conf. Use a text editor to open this file with superuser privileges:</p>
+                            <b><code>sudo nano /etc/dhcp/dhcpd.conf</code></b>
+                            <p>Here's a basic example of a DHCP configuration file:</p>
+                            <b><code>subnet 192.168.1.0 netmask 255.255.255.0 {
+                                range 192.168.1.100 192.168.1.200;
+                                option routers 192.168.1.1;
+                                option domain-name-servers 8.8.8.8, 8.8.4.4;
+                                option domain-name "example.com";
+                              }
+                              </code></b>
+                            <p>In this example, we've defined a DHCP subnet with a range of IP addresses to assign, the
+                                default gateway (router), DNS servers, and a domain name. Customize these settings
+                                according to your network requirements.
+                                Step 3: Start and Enable the DHCP Server
+                                Once you've configured the DHCP server, you need to start and enable it to run at boot.
+                                Use the following commands:</p>
+                            <b><code>sudo systemctl start isc-dhcp-server
+                                sudo systemctl enable isc-dhcp-server
+                                </code></b>
+                            <p>For Dnsmasq, you would start and enable it similarly:</p>
+                            <b><code>sudo systemctl start dnsmasq
+                                    sudo systemctl enable dnsmasq</code></b>
+                            <p>Step 4: Configure Network Interfaces
+                                Now that your DHCP server is up and running, you'll need to specify which network
+                                interface(s) it should listen on. Edit the DHCP server configuration file at
+                                /etc/default/isc-dhcp-server:</p>
+                            <b><code>sudo nano /etc/default/isc-dhcp-server</code></b>
+                            <p>And specify the interface(s) like so:</p>
+                            <b><code>INTERFACES="eth0"</code></b>
+                            <p>Replace "eth0" with the name of your network interface.
+
+                                For Dnsmasq, you can specify the interface(s) in the /etc/dnsmasq.conf file.
+
+                                Step 5: Firewall Rules (if necessary)
+
+                                Depending on your system's firewall settings, you might need to open the DHCP port (UDP
+                                67) to allow DHCP requests. Use your system's firewall management tools to configure
+                                this rule.
+
+                                Step 6: Testing
+
+                                To test your DHCP server, connect a client device (e.g., a computer or smartphone) to
+                                the network and ensure it's set to obtain an IP address automatically. It should receive
+                                an IP address within the range you specified in the configuration file.
+                            </p>
+                            <p>
+                                Setting up your own DHCP server on a Linux system can provide you with greater control
+                                over your network's IP address allocation and configuration. Remember to regularly
+                                review and update your DHCP server's configuration to meet the changing needs of your
+                                network. DHCP servers play a crucial role in network management, ensuring that devices
+                                can seamlessly connect and communicate within your network.</p>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo" id="fvsb">
+                        Frontend (HTML, CSS, JS) vs Backend (NodeJS, DB)
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        In the realm of web and software development, there's an age-old division that drives the
+                        creation of every digital experience we encounter: front-end vs. back-end development. These two
+                        domains work in tandem to bring websites and applications to life, but they each have distinct
+                        roles and require different skill sets. In this blog post, we'll explore the differences between
+                        front-end and back-end development, shed light on the tools and best practices for each, and
+                        delve into how the industry makes decisions regarding these crucial aspects of software
+                        development.
+
+                        Front-End Development: The User-Facing Facade
+
+                        Front-end development focuses on the visual and interactive aspects of a website or application,
+                        making it the part of development that users directly interact with. Here are some tips and
+                        tricks to excel in front-end development:
+                        <br>
+                        1. Master HTML, CSS, and JavaScript: These are the core technologies of front-end
+                        development. HTML structures content, CSS styles it, and JavaScript adds interactivity.
+                        Understanding these languages deeply is essential.
+                        <br>
+                        2. Responsive Design: Ensure that your front-end is responsive, meaning it adapts seamlessly
+                        to different screen sizes and devices. Employ frameworks like Bootstrap or Flexbox to streamline
+                        this process.
+                        <br>
+                        3. Browser Compatibility: Different browsers may interpret code differently. Cross-browser
+                        testing is vital to ensure your front-end looks and functions consistently across various
+                        browsers.
+                        <br>
+                        4. Performance Optimization: Optimize your code and assets to enhance website speed. Minify
+                        CSS and JavaScript, optimize images, and employ lazy loading to improve load times.
+                        <br>
+                        5. Version Control: Utilize version control systems like Git to track changes and
+                        collaborate with other developers efficiently.
+                        <br>
+                        When it comes to choosing an Integrated Development Environment (IDE) for front-end development,
+                        popular options include Visual Studio Code (VS Code), Sublime Text, and WebStorm.
+
+                        Back-End Development: The Engine Under the Hood
+
+                        Back-end development, on the other hand, deals with server-side logic, databases, and the hidden
+                        machinery that powers web applications. Here are some tips and tricks to excel in back-end
+                        development:
+
+                        1. Choose Your Language: Select a programming language for back-end development that suits
+                        your project's requirements. Popular choices include Python (Django), Ruby (Ruby on Rails),
+                        Node.js (Express), and PHP (Laravel).
+
+                        2. Database Management: Learn how to work with databases effectively. Familiarize yourself
+                        with both relational databases like MySQL and NoSQL databases like MongoDB.
+
+                        3. Security: Understand common security vulnerabilities like SQL injection and Cross-Site
+                        Scripting (XSS). Implement security best practices to protect user data and your application.
+
+                        4. Scalability: Design your back-end architecture with scalability in mind, allowing your
+                        application to handle increased traffic as it grows.
+
+                        5. APIs: Many modern applications rely on APIs (Application Programming Interfaces) for
+                        communication. Learn how to build and consume APIs.
+
+                        For back-end development, popular IDEs include Visual Studio Code (VS Code), PyCharm, and
+                        IntelliJ IDEA.
+
+                        Industry Decision-Making: Balancing Front-End and Back-End
+
+                        In the industry, decisions regarding front-end and back-end development are driven by project
+                        requirements and goals. Here are some key factors that influence these decisions:
+                        <br>
+                        1. Project Scope: The scale and complexity of a project play a significant role. Smaller
+                        projects may require less emphasis on back-end development, while large-scale applications
+                        demand robust back-end systems.
+                        <br>
+                        2. User Experience: If the user experience is a top priority, front-end development may
+                        receive more focus to ensure a polished and engaging interface.
+                        <br>
+                        3. Performance: Performance-critical applications, like e-commerce platforms, often invest
+                        heavily in back-end optimization to handle high traffic loads efficiently.
+                        <br>
+                        4. Team Expertise: The skills and expertise of the development team can influence the
+                        decision. If the team is proficient in a particular technology stack, it may guide the choice of
+                        front-end and back-end technologies.
+                        <br>
+                        5. Budget and Timeline: Project constraints, including budget and timeline, also impact
+                        decision-making. Tight schedules may necessitate prioritizing one aspect over the other.
+                        In conclusion, front-end and back-end development are integral parts of creating web and
+                        software applications. Mastering these domains requires a diverse skill set and knowledge of
+                        various technologies. The industry's decision-making process revolves around project-specific
+                        requirements, user experience goals, performance demands, team expertise, and resource
+                        constraints. Understanding these dynamics is essential for delivering successful digital
+                        experiences. Whether you're a front-end developer, back-end developer, or a full-stack
+                        developer, finding the right balance between these two aspects is key to building powerful and
+                        user-friendly applications.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" id="ai">
+                        Is Really AI going to replace you?
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        In recent years, there has been a growing fascination with artificial intelligence (AI) and its
+                        potential to reshape the job market. With advancements in machine learning and automation, many
+                        people wonder if AI is going to replace them in their current roles. In this blog, we'll explore
+                        the evolving relationship between AI and human workers, dispel some myths, and shed light on how
+                        AI is more of a tool for augmentation than replacement.
+
+                        The Augmentation, Not Replacement, Paradigm
+
+                        AI, at its core, is designed to augment human capabilities rather than replace them entirely.
+                        Here are a few key points to consider:
+                        <br>
+                        1. Enhancing Efficiency: AI can automate repetitive, mundane tasks, freeing up human workers
+                        to focus on more creative and strategic aspects of their jobs. This can lead to increased
+                        productivity and job satisfaction.
+                        <br>
+                        2. Decision Support: AI systems can analyze vast datasets and provide valuable insights that
+                        humans might miss. This can aid in making more informed decisions in various industries, from
+                        healthcare to finance.
+                        <br>
+                        3. Collaboration: AI-driven tools can be seen as collaborators, working alongside humans to
+                        improve outcomes. For example, in healthcare, AI can assist doctors in diagnosing diseases by
+                        analyzing medical images more accurately and quickly.
+                        <br>
+                        4. Creativity and Innovation: While AI can perform certain tasks efficiently, it lacks the
+                        creativity, emotional intelligence, and critical thinking abilities that humans possess. These
+                        uniquely human skills are irreplaceable and crucial for driving innovation.
+
+                        Dispelling the Myths
+                        <br>
+                        1. AI is a Job Killer: While AI can automate some tasks, it can also create new job
+                        opportunities. The demand for AI developers, data scientists, and AI ethics experts is on the
+                        rise.
+                        <br>
+                        2. AI Knows Everything: AI is only as good as the data it's trained on. It can't replace
+                        human judgment, and its decisions are based on patterns in data, not moral or ethical values.
+                        <br>
+                        3. AI Will Replace All Jobs: While AI can perform specific tasks exceptionally well, it
+                        struggles with tasks that require empathy, intuition, creativity, and complex decision-making.
+                        <br>
+                        4. Humans and AI Are in a Zero-Sum Game: In reality, humans and AI can complement each
+                        other. When properly integrated, AI can amplify human capabilities and lead to better outcomes.
+
+                        The Future of Work
+
+                        The future of work is likely to be characterized by collaboration between humans and AI. As AI
+                        continues to advance, it's essential for individuals to adapt and acquire skills that complement
+                        AI technologies. Lifelong learning and adaptability will be key for staying relevant in the job
+                        market.
+
+                        AI is a powerful tool that is transforming the way we work, but it is not here to replace us.
+                        Instead, AI is poised to enhance our abilities, automate routine tasks, and provide valuable
+                        insights. It is a tool for augmentation, not replacement. As we navigate the evolving landscape
+                        of work, it's crucial to embrace AI as a partner in our professional journeys, harness its
+                        capabilities, and continue to nurture the uniquely human skills that make us indispensable in
+                        the workplace. By doing so, we can create a future where humans and AI work together to achieve
+                        greater heights.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" id="learntocode">
+                        Learn to Code in a right way!
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample" style="padding: 17px;">
+                    Learning to code is an exciting and rewarding journey that opens up a world of possibilities.
+                    However, with the plethora of programming languages available, it can be challenging for
+                    beginners to decide where to start. In this short blog, we'll guide you through the process of
+                    choosing the right programming languages for beginners and offer some tips on how to approach
+                    your coding education.
+
+                    Choosing the Right Programming Languages
+                    <br>
+                    As a beginner, it's crucial to start with programming languages that are beginner-friendly and
+                    versatile. Here are some top choices:
+                    <br>
+                    1. Python: The Ultimate Beginner's Language
+                    <br>
+                    Python is often recommended as the first programming language for beginners, and for a good
+                    reason. It's easy to read, has a clean syntax, and is widely used in various fields, including
+                    web development, data analysis, artificial intelligence, and more. Python's extensive libraries
+                    and active community make it an excellent choice for learning the fundamentals of programming.
+
+                    2. JavaScript: The Language of the Web
+                    <br>
+                    JavaScript is the primary language for web development. If you're interested in building
+                    interactive websites, web applications, or mobile apps, learning JavaScript is essential. Its
+                    versatility and demand in the job market make it a valuable skill for aspiring developers.
+
+                    3. Scratch: A Fun Introduction to Coding
+                    <br>
+                    Scratch is a visual programming language designed specifically for beginners, especially kids.
+                    It's a great way to learn coding concepts through a drag-and-drop interface. While not suitable
+                    for all professional applications, Scratch provides an excellent foundation for understanding
+                    programming logic.
+
+                    4. Ruby: The Language of Creativity
+                    <br>
+                    Ruby is known for its simplicity and elegance. It's often associated with web development,
+                    especially when used with the Ruby on Rails framework. Ruby's focus on developer happiness makes
+                    it an enjoyable language to learn for beginners.
+
+                    Languages to Avoid as a Beginner
+
+                    While there are many programming languages to explore, some may not be the best choices for
+                    beginners due to their complexity or specialized use cases. Here are a few languages to consider
+                    avoiding at the outset:
+
+                    1. C and C++: Complex and Low-Level
+                    <br>
+                    C and C++ are powerful languages used in system programming and game development, but their
+                    steep learning curve and emphasis on low-level details can overwhelm beginners.
+
+                    2. Assembly Language: Extremely Low-Level
+                    <br>
+                    Assembly language is as low-level as it gets and is used for programming at the hardware level.
+                    Learning it without prior experience can be exceptionally challenging.
+
+                    3. Erlang: Specialized for Concurrency
+                    <br>
+                    Erlang is excellent for concurrent and distributed systems, but it's a niche language with a
+                    limited beginner-friendly community and resources.
+
+                    Tips for Learning to Code
+
+                    1. Start with the Basics: Begin with fundamental concepts like variables, data types,
+                    conditionals, loops, and functions. These concepts are universal across most programming
+                    languages.
+                    <br>
+                    2. Hands-On Practice: Learning to code is best done through hands-on practice. Write code,
+                    solve problems, and build small projects to reinforce your learning.
+                    <br>
+                    3. Online Resources: There are abundant online resources, tutorials, and coding platforms
+                    like Codecademy, Coursera, and edX that can help you learn and practice coding.
+                    <br>
+                    4. Community and Collaboration: Join coding communities and forums where you can seek help,
+                    collaborate on projects, and learn from others.
+                    <br>
+                    5. Stay Patient and Persistent: Coding can be challenging, but don't get discouraged.
+                    Learning to code is a journey that requires patience and persistence.
+                    <br>
+
+                    Choosing the right programming languages as a beginner is crucial to building a strong
+                    foundation in coding. Python, JavaScript, Scratch, and Ruby are excellent choices to start with
+                    due to their beginner-friendly nature and versatility. Remember that the key to successful
+                    coding is consistent practice and a willingness to learn. Happy coding!
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" id="python">
+                        Python Programming Language
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        Python, often called the "Swiss Army Knife" of programming languages, has gained immense
+                        popularity
+                        for its simplicity, versatility, and readability. In this blog, we'll explore the world of
+                        Python
+                        programming, its key features, and why it's an excellent choice for both beginners and
+                        experienced
+                        developers.
+
+                        1. Readability and Simplicity
+                        <br>
+
+                        One of Python's standout features is its clean and easily readable syntax. Python code resembles
+                        plain English, making it an excellent choice for beginners. Let's compare Python to other
+                        languages:
+
+                        Python:
+                        ```python
+                        print("Hello, World!")
+                        ```
+
+                        Java:
+                        ```java
+                        public class HelloWorld {
+                        public static void main(String[] args) {
+                        System.out.println("Hello, World!");
+                        }
+                        }
+                        ```
+
+                        Python's concise syntax reduces the chances of syntax errors and eases the learning curve for
+                        newcomers.
+
+                        2. Versatility and Wide Adoption
+                        <br>
+                        Python is an incredibly versatile language used in various domains:
+
+                        - Web Development: Frameworks like Django and Flask make web development a breeze.
+                        - Data Science: Python is the go-to language for data analysis and machine learning, with
+                        libraries like NumPy, pandas, and scikit-learn.
+                        - Scripting: It's perfect for writing automation scripts, handling file operations, and more.
+                        - Game Development: Libraries like Pygame are popular for creating 2D games.
+                        - Scientific Computing: Python is used extensively in scientific research and simulations.
+                        - Internet of Things (IoT): It's gaining traction in IoT projects with libraries like
+                        MicroPython.
+
+                        3. Large and Active Community
+                        <br>
+                        Python's community is vast and highly active. You can find countless tutorials, forums, and
+                        open-source libraries to help you along your coding journey. Whether you're stuck on a bug or
+                        seeking guidance on best practices, there's always a community member ready to assist.
+
+                        4. Cross-Platform Compatibility
+                        <br>
+                        Python is cross-platform, meaning you can write code on one operating system (e.g., Windows) and
+                        run
+                        it on another (e.g., macOS or Linux) with minimal modifications. This feature simplifies
+                        development
+                        and ensures your projects are accessible to a wide audience.
+
+                        5. Extensive Standard Library
+                        <br>
+                        Python boasts a rich standard library that covers a wide range of functions, from handling
+                        regular
+                        expressions to working with networking protocols. This extensive library reduces the need for
+                        developers to reinvent the wheel, saving time and effort.
+
+                        6. Rapid Development
+                        <br>
+                        Python's simplicity and high-level abstractions enable developers to create prototypes and
+                        applications quickly. This agility is especially beneficial in startups and projects where
+                        time-to-market is crucial.
+
+                        7. Strong for Beginners and Experts Alike
+                        <br>
+                        Python's beginner-friendly syntax makes it an ideal choice for those new to programming.
+                        However,
+                        its power and flexibility also attract experienced developers. As you gain proficiency, you can
+                        explore more advanced topics like decorators, metaclasses, and concurrency.
+
+                        8. Leading the AI and Machine Learning Revolution
+                        <br>
+                        Python's dominance in the field of artificial intelligence and machine learning cannot be
+                        overstated. Libraries such as TensorFlow, PyTorch, and Keras have solidified Python's position
+                        as
+                        the preferred language for AI research and development.<br>
+
+                        Python's allure lies in its simplicity, versatility, and vibrant community. Whether you're a
+                        novice
+                        or an experienced developer, Python has something to offer. Its gentle learning curve, combined
+                        with
+                        powerful capabilities, makes it a programming language that can take you from your first "Hello,
+                        World!" to building complex, real-world applications and contributing to cutting-edge
+                        technology. If
+                        you haven't already, it's time to dive into the world of Python programming and unlock its
+                        endless
+                        possibilities. Happy coding!
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree" id="chatgpt">
+                        Learn about chatGPT & AI Tools 
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <strong>This is the third item's accordion body.</strong> It is hidden by default, until the
+                        collapse plugin adds the appropriate classes that we use to style each element. These classes
+                        control the overall appearance, as well as the showing and hiding via CSS transitions. You can
+                        modify any of this with custom CSS or overriding our default variables. It's also worth noting
+                        that just about any HTML can go within the <code>.accordion-body</code>, though the transition
+                        does limit overflow.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <center>
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </center>
+    </main>
+
+    <footer>
+        <p align="center">&copy; VAPM Blog & News Website | All Rights Reserved 2023</p>
+    </footer>
+
+    <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
+    <script>
+        new TypeIt("#blogsection", {
+            strings: "Featured Blogs & News are here!",
+            speed: 50,
+            waitUntilVisible: true,
+        }).go();
+
+        // https://source.unsplash.com/random/900x700/?fruit
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script type="module" src="/js/main.js"></script>
+</body>
+
+</html>

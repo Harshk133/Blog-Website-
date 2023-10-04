@@ -1,0 +1,95 @@
+html{ font-size: 16px; }
+
+body{
+    overflow-x: hidden;
+    font-size: 1.2rem;
+}
+
+.collage-logo{
+    width: 5%;
+    margin-inline: 4px;
+}
+
+.container{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container-blogs{
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.info{
+    position: relative;
+    top: 10%;
+    width: 100%;
+    float: right;
+    z-index: 10;
+    padding: 35px;
+    right: 115px;
+}
+
+#container3D canvas {
+    width: 100% !important;
+    height: 100vh !important;
+    position: relative;
+    top: 40px;
+    left: 0px;
+}
+
+#container1{
+    display: flex;
+}
+
+main{
+    width: 90%;
+    margin: 0 auto;
+    min-height: 100vh;
+}
+
+@media (max-width: 500px) {
+    body{
+        font-size: 1.2rem;
+        overflow-x: hidden;
+    }
+
+    .collage-logo{
+        width: 20%;
+    }
+
+    #container3D{ display: none; }
+
+    .info{
+        position: relative;
+        top: 10%;
+        width: 100%;
+        float: right;
+        z-index: 10;
+        padding: 35px;
+        right: 0;
+        margin: 0 auto;
+    }
+
+    .container-blogs{
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .container-blogs .card{
+        margin: 10px 0;
+    }
+
+    footer{
+        font-size: 1rem;
+        padding: 7px;
+    }
+}
